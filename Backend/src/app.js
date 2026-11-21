@@ -7,9 +7,20 @@ const interviewRouter=require('./routes/interview.routes');
 
 app.use(express.json());
 app.use(cookieParser());
+const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
 app.use(cors({
-    origin: 'http://localhost:5173', //your frontend URL
-    credentials: true //mtlb frontend se cookies ko allow karna hai
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+            return;
+        }
+        callback(new Error('Origin is not allowed by CORS'));
+    },
+    credentials: true
 }));
 
 /* using this router for all the auth related routes */

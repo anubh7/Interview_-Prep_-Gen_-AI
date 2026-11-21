@@ -1,8 +1,10 @@
 import axios from 'axios'
 
 //ham yaha pe base url set kar rahe hai taki hum easily api calls kar sake baar baar base url likhne ki zarurat na pade
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 const api = axios.create({
-    baseURL: 'http://localhost:3000/api/auth',
+    baseURL: `${API_URL}/api/auth`,
     withCredentials: true // This is important to include if your server is setting cookies
 });
 export async function registerUser(username, email, password) {
