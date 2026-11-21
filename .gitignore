@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Environment and secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Build output
+**/dist/
+**/build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Puppeteer/browser artifacts
+.local-chromium/
+
+# Editors and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

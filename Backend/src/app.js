@@ -1,0 +1,20 @@
+const express=require('express');
+const app=express();
+const authRouter=require('./routes/auth.routes');
+const cookieParser=require('cookie-parser');
+const cors=require('cors');
+const interviewRouter=require('./routes/interview.routes');
+
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors({
+    origin: 'http://localhost:5173', //your frontend URL
+    credentials: true //mtlb frontend se cookies ko allow karna hai
+}));
+
+/* using this router for all the auth related routes */
+app.use('/api/auth',authRouter);
+app.use('/api/interview',interviewRouter);
+
+
+module.exports=app;
